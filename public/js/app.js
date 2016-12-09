@@ -40,26 +40,33 @@
 
 $(document).ready(function() {
   console.log('app.js loaded!');
-   $.get("/api/albums", function(albums){
+   $.get("/api/albums", function(albums){    
      albums.forEach(function(album){
       $('#albums').append(renderAlbum(album));
      });
    });
 
-  // $('.form-horizontal').on('submit', function(e) {
-  //   e.preventDefault();
-  //   var formdata = $(this).serialize();
-  //   console.log(formdata)
-  //   console.log('new album serialized', $(this).serializeArray());
-  //     $.post('/api/albums', function(req,res){
-  //       console.log('struff');
-  //     //   $('.form-horizontal',  function (alb){
-  //     //     console.log(alb);
-  //     //   });
-  //     res.json(formdata)
-  //     });
-  //     $(this).trigger("reset");
-  // });
+ $('#newAlbum').on('submit', function(e) {
+    e.preventDefault();
+    var formdata= $(this).serializeArray();
+    var formObj ={
+      name:formdata[0].value,
+      artistName:formdata[1].value,
+      releaseDate:formdata[2].value,
+      genres:formdata[3].value};
+    console.log(formObj);
+    console.log('new album serialized', formdata);
+    $.ajax({
+      method: 'POST',
+      url: '/api/albums',
+      data: $(this).serializeArray(),
+      success: $('#albums').append(renderAlbum(formObj))
+    });
+
+          $(this).trigger("reset");
+
+  });
+
 
 });  
 

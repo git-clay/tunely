@@ -88,20 +88,19 @@ app.get('/api/albums', function album_index(req, res){
 
 app.post('/api/albums',function (req,res){
   var newAlb = new db.Album({
-    artistName: req.body.artistName,
     name: req.body.name,
+    artistName: req.body.artistName,
     releaseDate: req.body.releaseDate,
     genres: req.body.genres
   });
-  console.log(req.params.name)
+//   // console.log(req.body.name)
   newAlb.save(function(err,album){
-    if(err){return console.log('error:",err');}
-      console.log("posted", album.name);
+  //   if(err){return console.log('error:",err');}
+      console.log("posted", newAlb);
 
-  res.json(album);
+  // res.json(console.log('howdy'));
 
   });
-
   });
 
 /**********

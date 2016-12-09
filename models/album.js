@@ -3,8 +3,8 @@ var mongoose = require('mongoose'),
 
 // models/book.js
 var AlbumSchema = new Schema({
-  artistName: String,
   name: String,
+  artistName: String,
   releaseDate: String,
   genres: [ String]
 });
